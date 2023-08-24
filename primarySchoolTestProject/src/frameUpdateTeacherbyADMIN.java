@@ -1,0 +1,515 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author sakib
+ */
+import java.text.SimpleDateFormat;
+import java.sql.*;
+import javax.swing.JOptionPane;
+
+public class frameUpdateTeacherbyADMIN extends javax.swing.JFrame {
+
+    public int TeacherID;
+
+    /**
+     * Creates new form frameUpdateTeacherbyADMIN
+     */
+    public frameUpdateTeacherbyADMIN() {
+        initComponents();
+        setSize(1000, 800);
+    }
+
+    public void setComponentsUpdateTeacherByAdmin(int id) {
+        TeacherID = id;
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection connection = DriverManager
+                    .getConnection(
+                            "jdbc:sqlserver://localhost:1433;databaseName=RainbowPrimarySchool;selectMethod=cursor", "sa", "123456");
+
+            // find if the username and password exist in database and also get the student id
+            String sqlQuery = "select * from TeacherTable where teacherId = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(sqlQuery);
+
+            statement.setInt(1, id);
+            int idFromDatabase = 0;
+            String FirstName = null;
+            String Lastname = null;
+            
+
+            //Date birthday = null;
+            String bloodGroup = null;
+            
+            String phone = null;
+            String email = null;
+            
+            String nid = null;
+            String accNo = null;
+            
+            String courses = null;
+            String address = null;
+            
+            double payable = 0;
+            double salary = 0;
+            
+
+            //Date joindate = null;
+            // Date resigndate = null;
+            String username = null;
+            String password = null;
+            
+            int iscurrentteacher = 0;
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                // Retrieve data for each row
+
+                //FirstName = resultSet.getString("studentFirstName");
+                idFromDatabase = resultSet.getInt("teacherId");
+                FirstName = resultSet.getString("teacherFirstName");
+                Lastname = resultSet.getString("teacherLastName");
+
+                //java.sql.Date sqlDate = resultSet.getDate("studentDOB");
+                //birthday = new Date(sqlDate.getTime());
+                //dateofBitrh = resultSet.getString("studentDOB");
+                bloodGroup = resultSet.getString("teacherBG");
+
+                phone = resultSet.getString("teacherPhone");
+                email = resultSet.getString("teacherEmail");
+                
+                
+                nid = resultSet.getString("teacherNID");
+                accNo = resultSet.getString("teacherAccountNo");
+                courses = resultSet.getString("teacherCourse");
+ 
+                address = resultSet.getString("teacherAddress");
+                
+                payable = resultSet.getDouble("teacherPayableMoney");
+                salary = resultSet.getDouble("teacherSalaryScale");
+
+                //java.sql.Date sqlDate2 = resultSet.getDate("studentAdmissionDate");
+                //admissionDate = new Date(sqlDate2.getTime());
+                //java.sql.Date sqlDate3 = resultSet.getDate("studentGraduationDate");
+                //graduationDate = new Date(sqlDate3.getTime());
+                //admissionDate = resultSet.getString("studentAdmissionDate");
+                //graduationDate = resultSet.getString("studentGraduationDate");
+                username = resultSet.getString("teacherUsername");
+                password = resultSet.getString("teacherPassword");
+             
+                iscurrentteacher = resultSet.getInt("isCurrentTeacher");
+
+            }
+            
+            tfTeacherID.setText(String.valueOf(idFromDatabase));
+            tfFirstname.setText(FirstName);
+            tfLastname.setText(Lastname);
+            tfBlood.setText(bloodGroup);
+            tfPhone.setText(phone);
+            tfEmail.setText(email);
+            tfNID.setText(nid);
+            tfAccountNo.setText(accNo);
+            tfCourses.setText(courses);
+            tfAddress.setText(address);
+            tfPayableMoney.setText(String.valueOf(payable));
+            tfSalary.setText(String.valueOf(salary));
+            tfusername.setText(username);
+            tfpassword.setText(password);
+            comboIsCurrentTeacher.setSelectedIndex(iscurrentteacher);
+            
+
+            //System.out.println(StudentClassId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel3 = new javax.swing.JLabel();
+        comboIsCurrentTeacher = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        tfFirstname = new javax.swing.JTextField();
+        tfAddress = new javax.swing.JTextField();
+        tfLastname = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        dateBirth = new com.toedter.calendar.JDateChooser();
+        tfBlood = new javax.swing.JTextField();
+        tfNID = new javax.swing.JTextField();
+        tfPhone = new javax.swing.JTextField();
+        tfCourses = new javax.swing.JTextField();
+        tfAccountNo = new javax.swing.JTextField();
+        tfSalary = new javax.swing.JTextField();
+        tfusername = new javax.swing.JTextField();
+        datejoin = new com.toedter.calendar.JDateChooser();
+        btnSubmit = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        tfpassword = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        tfTeacherID = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        tfEmail = new javax.swing.JTextField();
+        dateResign = new com.toedter.calendar.JDateChooser();
+        jLabel17 = new javax.swing.JLabel();
+        tfPayableMoney = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        lblBackground = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Last Name:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(524, 147, 160, 40));
+
+        comboIsCurrentTeacher.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        comboIsCurrentTeacher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "YES", "NO" }));
+        getContentPane().add(comboIsCurrentTeacher, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 685, 137, 38));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Salary Scale:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(524, 462, 160, 40));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Blood Group:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 286, 160, 40));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Join Date");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 520, 160, 40));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Phone:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 339, 160, 40));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Username:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 588, 160, 40));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 26)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Teacher Update By ADMIN");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 13, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Password:");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(524, 588, 160, 40));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Date of Birth:");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 218, 160, 40));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("IS CURRENT TEACHER:");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 689, 260, 31));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Address:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(524, 286, 160, 40));
+
+        tfFirstname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(tfFirstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 147, 200, 40));
+
+        tfAddress.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(tfAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(689, 286, 200, 40));
+
+        tfLastname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(tfLastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(689, 147, 200, 40));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("NID:");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(524, 218, 160, 40));
+        getContentPane().add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 218, 200, 40));
+
+        tfBlood.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(tfBlood, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 286, 200, 40));
+
+        tfNID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(tfNID, new org.netbeans.lib.awtextra.AbsoluteConstraints(689, 218, 200, 40));
+
+        tfPhone.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(tfPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 339, 200, 40));
+
+        tfCourses.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(tfCourses, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 462, 200, 40));
+
+        tfAccountNo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(tfAccountNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 397, 200, 40));
+
+        tfSalary.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tfSalary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfSalaryActionPerformed(evt);
+            }
+        });
+        getContentPane().add(tfSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(689, 462, 200, 40));
+
+        tfusername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(tfusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 588, 200, 40));
+        getContentPane().add(datejoin, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 200, 40));
+
+        btnSubmit.setBackground(new java.awt.Color(0, 204, 0));
+        btnSubmit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 682, 161, 46));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("First Name:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 147, 160, 40));
+
+        btnBack.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(787, 678, 102, 44));
+
+        tfpassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(tfpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(689, 588, 200, 40));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Courses:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 462, 160, 40));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Account NO:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 397, 160, 40));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Teacher ID:");
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 84, 150, 35));
+
+        tfTeacherID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tfTeacherID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfTeacherIDActionPerformed(evt);
+            }
+        });
+        getContentPane().add(tfTeacherID, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 84, 438, 35));
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Email:");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(524, 342, 160, 35));
+
+        tfEmail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(tfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(689, 342, 200, 35));
+        getContentPane().add(dateResign, new org.netbeans.lib.awtextra.AbsoluteConstraints(689, 520, 200, 40));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Resign Date:");
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(524, 520, 160, 40));
+
+        tfPayableMoney.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(tfPayableMoney, new org.netbeans.lib.awtextra.AbsoluteConstraints(689, 404, 200, 40));
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Payable Money");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(524, 404, 160, 40));
+
+        lblBackground.setForeground(new java.awt.Color(255, 255, 255));
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ComnmonBG.png"))); // NOI18N
+        getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 810));
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void tfSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSalaryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfSalaryActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection connection = DriverManager
+                    .getConnection(
+                            "jdbc:sqlserver://localhost:1433;databaseName=RainbowPrimarySchool;selectMethod=cursor", "sa", "123456");
+
+            // find if the username and password exist in database and also get the student id
+            String sqlQuery = "UPDATE TeacherTable SET teacherFirstName = ?, teacherLastName = ?,teacherDOB=?,teacherBG=?,teacherPhone=?,teacherEmail=?,teacherNID=?,teacherAccountNo=?,teacherCourse=?,teacherAddress=?,teacherPayableMoney=?,teacherSalaryScale=?,teacherJoinDate=?,teacerResignDate=?, teacherUsername=?,teacherPassword=?,isCurrentTeacher=?  WHERE teacherId = ?";
+
+            PreparedStatement statement = connection.prepareStatement(sqlQuery);
+
+            statement.setString(1, tfFirstname.getText());
+            statement.setString(2, tfLastname.getText());
+            
+            SimpleDateFormat dtformat = new SimpleDateFormat("yyyy-MM-dd");
+            String birthday = dtformat.format(dateBirth.getDate());
+            statement.setString(3, birthday);
+            statement.setString(4, tfBlood.getText());
+
+            
+            statement.setString(5, tfPhone.getText()); // birthday 
+            statement.setString(6, tfEmail.getText());
+            statement.setString(7, tfNID.getText());
+            statement.setString(8, tfAccountNo.getText());
+            statement.setString(9, tfCourses.getText());
+            statement.setString(10, tfAddress.getText());
+            statement.setDouble(11, Double.valueOf(tfPayableMoney.getText()));
+            statement.setDouble(12, Double.valueOf(tfSalary.getText()));
+            String joindate = dtformat.format(datejoin.getDate());
+            statement.setString(13, joindate);
+            String resigndate = dtformat.format(dateResign.getDate());
+            statement.setString(14, resigndate);
+            
+            
+            statement.setString(15, tfusername.getText());
+            statement.setString(16, tfpassword.getText());
+            
+            statement.setInt(17, comboIsCurrentTeacher.getSelectedIndex());
+            statement.setInt(18, TeacherID);
+
+            int updated = statement.executeUpdate();
+            if (updated > 0) {
+                JOptionPane.showMessageDialog(frameUpdateTeacherbyADMIN.this, "Update Successful");
+            } else {
+                JOptionPane.showMessageDialog(frameUpdateTeacherbyADMIN.this, "Update not Successful");
+            }
+
+            //System.out.println(StudentClassId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //JOptionPane.showMessageDialog(frameSignUpAsTeacherbyADMIN.this, tfTeacherId_signTcrbyADM.getText()+" is added");
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        frameManageTeacherbyADMIN manageTeacherbyADMIN = new frameManageTeacherbyADMIN();
+        manageTeacherbyADMIN.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void tfTeacherIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTeacherIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfTeacherIDActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(frameUpdateTeacherbyADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(frameUpdateTeacherbyADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(frameUpdateTeacherbyADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(frameUpdateTeacherbyADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new frameUpdateTeacherbyADMIN().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSubmit;
+    private javax.swing.JComboBox<String> comboIsCurrentTeacher;
+    private com.toedter.calendar.JDateChooser dateBirth;
+    private com.toedter.calendar.JDateChooser dateResign;
+    private com.toedter.calendar.JDateChooser datejoin;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblBackground;
+    private javax.swing.JTextField tfAccountNo;
+    private javax.swing.JTextField tfAddress;
+    private javax.swing.JTextField tfBlood;
+    private javax.swing.JTextField tfCourses;
+    private javax.swing.JTextField tfEmail;
+    private javax.swing.JTextField tfFirstname;
+    private javax.swing.JTextField tfLastname;
+    private javax.swing.JTextField tfNID;
+    private javax.swing.JTextField tfPayableMoney;
+    private javax.swing.JTextField tfPhone;
+    private javax.swing.JTextField tfSalary;
+    private javax.swing.JTextField tfTeacherID;
+    private javax.swing.JTextField tfpassword;
+    private javax.swing.JTextField tfusername;
+    // End of variables declaration//GEN-END:variables
+}
